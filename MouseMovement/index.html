@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mouse-movement</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body{
+            background: #000;
+            height: 100%;
+            width: 100%;
+            overflow: hidden; /* not appear scrollbar */
+        }
+        .box{
+            background: red;
+            height: 200px;
+            width: 200px;
+            position: absolute;
+            transition: all cubic-bezier(0.19, 1, 0.22, 1) 1s;
+        }
+        
+
+    </style>
+</head>
+<body>
+
+   <div class="box" >
+
+   </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
