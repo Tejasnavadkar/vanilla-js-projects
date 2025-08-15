@@ -1,0 +1,214 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+<style>
+body, html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+.container {
+  width: 100vw;
+  height: 100vh;
+  background: #f2f2f5; /* slightly grayish white */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.card {
+  width: 340px;
+  height: 180px;
+  background: #fff;
+  border-radius: 12px;
+  /* box-shadow:
+    0px 10px 0px -5px rgba(200, 200, 200, 0.12), 
+    0px 20px 0px -9px rgba(180, 180, 180, 0.18),  
+    0px 30px 0px -13px rgba(160, 160, 160, 0.25);   */
+     box-shadow: 0px 6px 0px -5px rgba(160, 160, 160, 0.18), 0px 9px 0px  rgba(160, 160, 160, 0.28);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: #333;
+}
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      Card Content
+    </div>
+  </div>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Card UI</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+     <div class="form">
+            <form class="box">
+                <div class="heading">
+                    New Call
+                </div>
+                <div class="field">
+                    <span>Image Url</span>
+                    <input type="text" placeholder="https://example.com.jpg">
+                </div>
+                <div class="field">
+                    <span>Full Name Url</span>
+                    <input type="text" placeholder="Enter full name">
+                </div>
+                <div class="field">
+                    <span>Home Town</span>
+                    <input type="text" placeholder="Enter home town">
+                </div>
+                <div class="field">
+                    <span>Purpose</span>
+                    <input type="text" placeholder="eg.Quick appointemen note">
+                </div>
+                <div class="field">
+                    <span>category</span>
+                    <div class="radiobtns">
+                        <div class="emergencyRadio">
+                            <input type="radio" name="category" id="">
+                            <span>Emergency</span>
+                        </div>
+                         <div class="importantRadio">
+                            <input type="radio" name="category" id="">
+                            <span>important</span>
+                        </div>
+                         <div class="urgentRadio">
+                            <input type="radio" name="category" id="">
+                            <span>Urgent</span>
+                        </div>
+                         <div class="noRushRadio">
+                            <input type="radio" name="category" id="">
+                            <span>no rush</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <Button class="button submitbtn">Create Note</Button>
+                    <Button class="button closebtn" type="button" >close</Button>
+                </div>
+            </form>
+    </div>
+
+    <div class="container">
+        <!-- change buttons -->
+        <div class="nav-controls">
+            <button class="nav-btn" id="createNote">+</button>
+            <button class="nav-btn" id="nextNote">↑</button>
+            <button class="nav-btn" id="prevNote">↓</button>
+        </div>
+
+        <!-- profilecard  -->
+       <div class="profilecard-Section">
+        <!-- <div class="profile-card">
+            <div class="profile-header">
+                <div class="profile-image">
+                    <img src="/placeholder.svg?height=64&width=64" alt="Fatima Uma">
+                </div>
+                <h2 class="profile-name">Fatima Uma</h2>
+            </div>
+
+            <div class="profile-info">
+                <div class="info-row">
+                    <span class="info-label">Home town</span>
+                    <span class="info-value">Singapore</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Bookings</span>
+                    <span class="info-value">3 times</span>
+                </div>
+            </div>
+            <div class="action-buttons">
+                <button class="btn btn-call">
+                    <svg class="phone-icon" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+                    </svg>
+                    Call
+                </button>
+                <button class="btn btn-message">Message</button>
+            </div>
+        </div>
+         <div class="profile-card">
+            <div class="profile-header">
+                <div class="profile-image">
+                    <img src="/placeholder.svg?height=64&width=64" alt="Fatima Uma">
+                </div>
+                <h2 class="profile-name">Fatima Uma</h2>
+            </div>
+
+            <div class="profile-info">
+                <div class="info-row">
+                    <span class="info-label">Home town</span>
+                    <span class="info-value">Singapore</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Bookings</span>
+                    <span class="info-value">3 times</span>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-call">
+                    <svg class="phone-icon" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+                    </svg>
+                    Call
+                </button>
+                <button class="btn btn-message">Message</button>
+            </div>
+        </div> 
+         <div class="profile-card">
+            <div class="profile-header">
+                <div class="profile-image">
+                    <img src="/placeholder.svg?height=64&width=64" alt="Fatima Uma">
+                </div>
+                <h2 class="profile-name">Fatima Uma</h2>
+            </div>
+
+            <div class="profile-info">
+                <div class="info-row">
+                    <span class="info-label">Home town</span>
+                    <span class="info-value">Singapore</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Bookings</span>
+                    <span class="info-value">3 times</span>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-call">
+                    <svg class="phone-icon" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+                    </svg>
+                    Call
+                </button>
+                <button class="btn btn-message">Message</button>
+            </div>
+        </div>  -->
+       </div>
+         
+        <!-- colors  -->
+        <div class="color-indicators">
+            <div class="color-dot dot-black"></div>
+            <div class="color-dot dot-purple"></div>
+            <div class="color-dot dot-orange"></div>
+            <div class="color-dot dot-teal"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
