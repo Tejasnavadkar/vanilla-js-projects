@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Debounce vs Throttle Example</title>
+  <style>
+    body {
+      height: 3000px;
+      font-family: sans-serif;
+      padding: 20px;
+      border:2px solid red;
+    }
+    .box {
+      position: fixed;
+      top: 10px;
+      right: 20px;
+      background: #f0f0f0;
+      border: 2px solid #ccc;
+      padding: 10px;
+      border-radius: 8px;
+    }
+    .title {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    .value {
+      font-size: 18px;
+      color: #0077ff;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="box">
+    <div class="title">Scroll Events Count:</div>
+    <div>Normal: <span id="normal" class="value">0</span></div>
+    <div>Debounced: <span id="debounced" class="value">0</span></div>
+    <div>Throttled: <span id="throttled" class="value">0</span></div>
+  </div>
+
+  <script>
+
+// Chalo ek simple HTML + JS demo banaate hain jisme hum scroll event pe debounce aur throttle dono ka visual difference dekhenge.
+
+
+    let normalCount = 0;
+    let debouncedCount = 0;
+    let throttledCount = 0;
+
+    const normalEl = document.getElementById("normal");
+    const debouncedEl = document.getElementById("debounced");
+    const throttledEl = document.getElementById("throttled");
+
+    // 🔹 Debounce function
+    function debounce(func, delay) {
+      let timer;
+      return function(...args) {
+        clearTimeout(timer);
+        timer = setTimeout(() => func.apply(this, args), delay);
+      };
+    }
+
+    // 🔹 Throttle function
+    function throttle(func, limit) {
+      let inThrottle;
+      return function(...args) {
+        if (!inThrottle) {
+          func.apply(this, args);
+          inThrottle = true;
+          setTimeout(() => (inThrottle = false), limit);
+        }
+      };
+    }
+
+    // Functions to update counts
+    function normalScroll() {
+      normalEl.textContent = ++normalCount;
+    }
+
+    function debouncedScroll() {
+      debouncedEl.textContent = ++debouncedCount;
+    }
+
+    function throttledScroll() {
+      throttledEl.textContent = ++throttledCount;
+    }
+
+    // Event listeners
+    window.addEventListener("scroll", normalScroll);
+    window.addEventListener("scroll", debounce(debouncedScroll, 500));
+    window.addEventListener("scroll", throttle(throttledScroll, 500));
+
+// explaination
+// Isme kya hoga:
+
+// Jab aap scroll karoge,
+
+// Normal count bahut tezi se badhega (har scroll event fire par).
+
+// Debounced count tab badhega jab aap scroll karna band kar doge (500ms ke baad).
+
+// Throttled count har 500ms me ek baar hi badhega, chahe scroll continuous hi chal raha ho.
+
+  </script>
+</body>
+</html>
