@@ -1,0 +1,1 @@
+#### article for intersection observer:-  https://blog.webdevsimplified.com/2022-01/intersection-observer/
