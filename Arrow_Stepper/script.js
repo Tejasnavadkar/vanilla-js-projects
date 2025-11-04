@@ -13,8 +13,8 @@ allBoxes.forEach((box, idx) => {
 function updateActiveBox(activeCount) {
     // remove/clear classes and set new ones according to count
     allBoxes.forEach((box, idx) => {
-        // active only for the current box
-        box.classList.toggle('active', idx === activeCount)
+        // active only for the current box  
+        box.classList.toggle('active', idx === activeCount)  // here toogle meanse agar true hai to hi active set karna otherwise not
         // completed (or visited) for all boxes before the current one
         box.classList.toggle('completed', idx < activeCount)
     })
