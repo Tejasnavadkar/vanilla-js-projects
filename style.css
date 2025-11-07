@@ -1,0 +1,130 @@
+body{
+  padding: 50px;
+}
+*{
+  box-sizing: border-box;
+}
+.box {
+  /*padding: 10px;*/
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /*line-height: 35px;*/
+  
+	height: 50px;
+	width: 200px;
+	background-color: red;
+	position: relative;
+	border-radius: 5px;
+	color: white;
+
+
+}
+.container{
+  width: 100%;
+  border: 1px solid blue;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.box.right::after{  /*here after rightside arrow structure*/
+  content: "";
+  height: 37px;
+  width: 37px;
+  border-radius: 5px;
+   /* border-top: 1px solid black; to make border
+  border-right: 1px solid black; */
+  background-color: red;
+  position: absolute;
+  right: 0;
+  z-index: 100;
+  -webkit-transform: translate(16px,0px) rotate(45deg);  /* Chrome & Safari old */
+  -moz-transform: translate(16px,0px) rotate(45deg);     /* Firefox old */
+        -ms-transform: translate(16px,0px) rotate(45deg); /* Internet Explorer old */
+         -o-transform: translate(16px,0px) rotate(45deg); /* Opera old */
+            transform: translate(16px,0px) rotate(45deg);  /* Modern standard property */
+  
+}
+
+
+
+.box.left::before{ /*here after leftside/backside arrow structure*/
+  content: "";
+   height: 37px;
+  width: 37px;
+  border-radius: 5px;
+  background-color: white;
+  position: absolute;
+  left: 0;
+  z-index: 99;
+    -webkit-transform: translate(-16px,0px) rotate(45deg);       /* Chrome & Safari old */
+   -moz-transform: translate(-16px,0px) rotate(45deg);           /* Firefox old */
+             -ms-transform: translate(-16px,0px) rotate(45deg);  /* Internet Explorer old */
+             -o-transform: translate(-16px,0px) rotate(45deg);   /* Opera old */
+             transform: translate(-16px,0px) rotate(45deg);       /* Modern standard property */
+  
+}
+
+
+/* Aaj ke time me agar sirf ye likho: transform: translate(16px,0px) rotate(45deg); */
+/* To bhi sab modern browsers me perfectly kaam karta hai.
+Phir bhi hum log ye saare prefixes kyu dekhte hai?
+Chalo easy aur clear tariqe se samajhte hai 👇
+
+🔥 Prefixes kya hote hain?
+
+Pehle ke time (around CSS3 jab naya-naya aaya tha), har browser new CSS features ko apne tarike se implement karta tha.
+Isiliye developers ko different browsers ke liye alag-alag keywords likhne padte the.
+
+| Prefix     | Kaunse browser ke liye?                 |
+| ---------- | --------------------------------------- |
+| `-webkit-` | Chrome, Safari, iOS browsers            |
+| `-moz-`    | Mozilla Firefox                         |
+| `-ms-`     | Internet Explorer / Edge (old versions) |
+| `-o-`      | Opera (old versions)                    |
+
+-webkit-transform: ...;  /* Chrome & Safari old */
+/* -moz-transform: ...;     /* Firefox old */
+/* -ms-transform: ...;      Internet Explorer old */
+/* -o-transform: ...;       Opera old */
+/* transform: ...;          Modern standard property */
+
+/* ✅ Aaj ke time me kya situation hai? */
+
+/* Modern browsers CSS transform property ko fully support karte hain.
+Iska matlab:
+
+Aaj ke time me sirf ye likhna kaafi hai:
+
+transform: translate(...) rotate(...);  */
+
+/* 🤔 Phir still log prefix kyu likhte hain?
+
+- Old browser support maintain karna ho to prefix helpful hote hain.
+
+- Especially agar koi website IE 11 ya bohot purane devices pe bhi chalti ho.
+
+- Code old projects se copy hua hota hai, jaha pe prefixes use hote the.
+
+- Some developers habit se ya safe side ke liye likhte hain. */
+
+
+/* optimized css
+.box.right::after {
+  content: "";
+  height: 37px;
+  width: 37px;
+  border-radius: 5px;
+  background-color: red;
+  position: absolute;
+  right: 0;
+  transform: translate(16px,0px) rotate(45deg);
+} */
+
+
+
+
+
+
+
