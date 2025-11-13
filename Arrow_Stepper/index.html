@@ -111,3 +111,58 @@
      <script src="script.js"></script>
   </body>
 </html>
+
+<!-- /* Aaj ke time me agar sirf ye likho: transform: translate(16px,0px) rotate(45deg); */
+/* To bhi sab modern browsers me perfectly kaam karta hai.
+Phir bhi hum log ye saare prefixes kyu dekhte hai?
+Chalo easy aur clear tariqe se samajhte hai 👇
+
+🔥 Prefixes kya hote hain?
+
+Pehle ke time (around CSS3 jab naya-naya aaya tha), har browser new CSS features ko apne tarike se implement karta tha.
+Isiliye developers ko different browsers ke liye alag-alag keywords likhne padte the.
+
+| Prefix     | Kaunse browser ke liye?                 |
+| ---------- | --------------------------------------- |
+| `-webkit-` | Chrome, Safari, iOS browsers            |
+| `-moz-`    | Mozilla Firefox                         |
+| `-ms-`     | Internet Explorer / Edge (old versions) |
+| `-o-`      | Opera (old versions)                    |
+
+-webkit-transform: ...;  /* Chrome & Safari old */
+/* -moz-transform: ...;     /* Firefox old */
+/* -ms-transform: ...;      Internet Explorer old */
+/* -o-transform: ...;       Opera old */
+/* transform: ...;          Modern standard property */
+
+/* ✅ Aaj ke time me kya situation hai? */
+
+/* Modern browsers CSS transform property ko fully support karte hain.
+Iska matlab:
+
+Aaj ke time me sirf ye likhna kaafi hai:
+
+transform: translate(...) rotate(...);  */
+
+/* 🤔 Phir still log prefix kyu likhte hain?
+
+- Old browser support maintain karna ho to prefix helpful hote hain.
+
+- Especially agar koi website IE 11 ya bohot purane devices pe bhi chalti ho.
+
+- Code old projects se copy hua hota hai, jaha pe prefixes use hote the.
+
+- Some developers habit se ya safe side ke liye likhte hain. */
+
+
+/* optimized css
+.box.right::after {
+  content: "";
+  height: 37px;
+  width: 37px;
+  border-radius: 5px;
+  background-color: red;
+  position: absolute;
+  right: 0;
+  transform: translate(16px,0px) rotate(45deg);
+} */ -->
