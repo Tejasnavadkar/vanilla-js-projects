@@ -7,9 +7,10 @@ const boardWidth = board.clientWidth
 
 console.log({boardHeight,boardWidth})
 
-const cols = Math.floor(boardWidth/boxWidth)  // here we write calculations ki kite box ayenge coloms me and rows me according to the board height and width
+const cols = Math.floor(boardWidth/boxWidth)  // here we write calculations ki kitne box ayenge coloms me and rows me according to the board height and width
 const rows = Math.floor(boardHeight/boxHeight)
 
+//here we add boxes inside board accoording to the board height and width
 for(let i = 0 ; i < cols*rows ; i++){
   const box = document.createElement('div')
   box.classList.add("box")

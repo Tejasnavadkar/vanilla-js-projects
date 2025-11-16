@@ -79,10 +79,10 @@ section .infos{
     /* flex: auto; */
     flex-grow: 1;  /*take all space*/
     display: grid;
-    grid-template-columns: repeat(auto-fill,30px);
-    grid-template-rows: repeat(auto-fill,30px);
-    justify-content: center;
-    align-items: center;
+    grid-template-columns: repeat(auto-fill,minmax(30px,1fr)); /*minmax(30px,1fr) meanse minimam 30px hoga and max 1fr to disturabute vacant space evenly */
+    grid-template-rows: repeat(auto-fill,minmax(30px,1fr));
+    /* justify-content: center;
+    align-items: center; */
 }
 
 .box{
