@@ -9,7 +9,6 @@ html,body{
     height: 100%;
     width: 100%;
     border: 2px solid red;
-
 }
 
 :root{
@@ -54,6 +53,11 @@ main,section{
 
 section{
     padding: var(--space-xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    
+    
 }
 
 section .infos{
@@ -66,7 +70,25 @@ section .infos{
 
 .info{
     border:1px solid;
-    padding: var(--border-radius-xs) var(--space-md); 
-    border-radius: var(--border-radius-xs);
+    padding: var(--space-xs) var(--space-md); 
+    border-radius: var(--border-radius-sm);
+}
+
+.board{
+    border: 1px solid var(--border-primary-color);
+    /* flex: auto; */
+    flex-grow: 1;  /*take all space*/
+    display: grid;
+    grid-template-columns: repeat(auto-fill,30px);
+    grid-template-rows: repeat(auto-fill,30px);
+    justify-content: center;
+    align-items: center;
+}
+
+.box{
+    height: 30px;
+    width: 30px;
+    border: 1px solid var(--border-primary-color);
+    flex-shrink: 0;
 }
 
