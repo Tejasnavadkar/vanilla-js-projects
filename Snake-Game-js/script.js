@@ -1,7 +1,7 @@
 
 const board = document.querySelector(".board")
-const boxHeight = 30
-const boxWidth = 30
+const boxHeight = 50
+const boxWidth = 50
 const boardHeight = board.clientHeight // here we get board height and width
 const boardWidth = board.clientWidth
 
@@ -11,9 +11,89 @@ const cols = Math.floor(boardWidth/boxWidth)  // here we write calculations ki k
 const rows = Math.floor(boardHeight/boxHeight)
 
 //here we add boxes inside board accoording to the board height and width
-for(let i = 0 ; i < cols*rows ; i++){
-  const box = document.createElement('div')
-  box.classList.add("box")
-  board.appendChild(box)
+// for(let i = 0 ; i < cols*rows ; i++){
+//   const box = document.createElement('div')
+//   box.classList.add("box")
+//   board.appendChild(box)
+// }
+
+const boxes = []
+let snake = [{x:2,y:13}]   // ,{x:1,y:14},{x:1,y:15} snake coordinates
+let direction = "right"
+// write loop in different way so we can give coordinates to box like 0-0,0-1(0-row 1-col)
+for(let row = 0 ; row <rows ; row++){
+    for(let col = 0 ; col < cols ; col++){
+          const box = document.createElement('div')
+          box.classList.add("box")
+          box.innerText = `${row}-${col}`
+          boxes[`${row}-${col}`] = box
+          board.appendChild(box)
+    }
 }
+console.log("boxes-",boxes)
+// console.log(`0-0:-`,boxes[0])
+
+// render()
+function render(){
+    snake.forEach((elem)=>boxes[`${elem.x}-${elem.y}`].classList.add("fill"))  // here we render the snake
+}
+
+addEventListener("keydown",(e)=>{
+    // console.log(e.key)
+    if(e.key === "ArrowUp"){
+        direction = "up"
+    }else if(e.key === "ArrowDown"){
+          direction = "down" 
+    }else if(e.key === "ArrowLeft"){
+        direction = "left"
+    }else if(e.key === "ArrowRight"){
+        direction = "right"
+    }
+})
+
+// core logic
+// setInterval(()=>{
+//     // 3fps(we execute render function 3 times per second) hum yaha pe sirf execute fast kar rahe hai esiliye hum box move hote dikh rahe hai lekin real me wo move nahi ho rahe hai hum frequenly diffietn img dikha rahe hai isiliy wo move hoti dikh rahi hai
+    
+//     snake.forEach((elem)=>boxes[`${elem.x}-${elem.y}`].classList.remove("fill"))
+//     if(direction === "left"){
+//        snake = snake.map((elem)=>({x:elem.x,y:elem.y-1}))
+//     //    console.log("snake-",snake)
+//     }else if(direction === "right"){
+//         snake = snake.map((elem)=>({x:elem.x,y:elem.y+1}))
+//     }else if(direction === "down"){
+//        snake = snake.map((elem)=>({x:elem.x+1,y:elem.y}))
+//     }else if(direction === "up"){
+//        snake = snake.map((elem)=>({x:elem.x-1,y:elem.y}))
+//     }
+   
+//     render()
+// },300)
+
+setInterval(()=>{
+    // 3fps(we execute render function 3 times per second) hum yaha pe sirf execute fast kar rahe hai esiliye hum box move hote dikh rahe hai lekin real me wo move nahi ho rahe hai hum frequenly diffietn img dikha rahe hai isiliy wo move hoti dikh rahi hai
+    
+    let head = null
+  
+    if(direction === "left"){
+        head = {x:snake[0].x,y:snake[0].y-1}
+    //    snake = snake.map((elem)=>({x:elem.x,y:elem.y-1}))
+    }else if(direction === "right"){
+        head = {x:snake[0].x,y:snake[0].y+1}
+        // snake = snake.map((elem)=>({x:elem.x,y:elem.y+1}))
+    }else if(direction === "down"){
+        head = {x:snake[0].x+1,y:snake[0].y}
+    //    snake = snake.map((elem)=>({x:elem.x+1,y:elem.y}))
+    }else if(direction === "up"){
+        head = {x:snake[0].x-1,y:snake[0].y}
+    //    snake = snake.map((elem)=>({x:elem.x-1,y:elem.y}))
+    }
+
+    snake.forEach((elem)=>boxes[`${elem.x}-${elem.y}`].classList.remove("fill")) // initially remove all fills
+    snake.unshift(head) // head ko front side place kiya
+    snake.pop()
+   
+    render()
+},300)
+
 

@@ -14,6 +14,7 @@ html,body{
 :root{
     /* background colors */
     --bg-primar-color:#0c0c0c;
+    --bg-fill-color:#fdfdfc;
 
     /* text colors */
     --text-primary-color:#f0f0f0;
@@ -79,16 +80,21 @@ section .infos{
     /* flex: auto; */
     flex-grow: 1;  /*take all space*/
     display: grid;
-    grid-template-columns: repeat(auto-fill,minmax(30px,1fr)); /*minmax(30px,1fr) meanse minimam 30px hoga and max 1fr to disturabute vacant space evenly */
-    grid-template-rows: repeat(auto-fill,minmax(30px,1fr));
+    grid-template-columns: repeat(auto-fill,minmax(50px,1fr)); /*minmax(30px,1fr) meanse minimam 30px hoga and max 1fr to disturabute vacant space evenly */
+    grid-template-rows: repeat(auto-fill,minmax(50px,1fr));
     /* justify-content: center;
     align-items: center; */
 }
 
 .box{
-    height: 30px;
-    width: 30px;
+    height: 50px;
+    width: 50px;
     border: 1px solid var(--border-primary-color);
     flex-shrink: 0;
+}
+
+.fill{
+    background-color: var(--bg-fill-color);
+
 }
 
