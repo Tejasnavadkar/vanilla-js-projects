@@ -5,10 +5,16 @@ const boxWidth = 50
 const boardHeight = board.clientHeight // here we get board height and width
 const boardWidth = board.clientWidth
 
-console.log({boardHeight,boardWidth})
+// console.log({boardHeight,boardWidth})
 
 const cols = Math.floor(boardWidth/boxWidth)  // here we write calculations ki kitne box ayenge coloms me and rows me according to the board height and width
 const rows = Math.floor(boardHeight/boxHeight)
+
+const boxes = []
+let snake = [{x:2,y:13}]   // ,{x:1,y:14},{x:1,y:15} snake coordinates
+let direction = "right"
+let intervalId = null
+let food = {x:Math.floor(Math.random() * rows),y:Math.floor(Math.random()*cols)} // create food box randomlly in board
 
 //here we add boxes inside board accoording to the board height and width
 // for(let i = 0 ; i < cols*rows ; i++){
@@ -17,10 +23,7 @@ const rows = Math.floor(boardHeight/boxHeight)
 //   board.appendChild(box)
 // }
 
-const boxes = []
-let snake = [{x:2,y:13}]   // ,{x:1,y:14},{x:1,y:15} snake coordinates
-let direction = "right"
-// write loop in different way so we can give coordinates to box like 0-0,0-1(0-row 1-col)
+// write loop in different way so we can give coordinates to box like 0-0,0-1(0-row(x) 1-col(y))
 for(let row = 0 ; row <rows ; row++){
     for(let col = 0 ; col < cols ; col++){
           const box = document.createElement('div')
@@ -31,10 +34,44 @@ for(let row = 0 ; row <rows ; row++){
     }
 }
 console.log("boxes-",boxes)
-// console.log(`0-0:-`,boxes[0])
 
 // render()
 function render(){
+
+    let head = null
+  
+    if(direction === "left"){
+        head = {x:snake[0].x,y:snake[0].y-1}
+    //    snake = snake.map((elem)=>({x:elem.x,y:elem.y-1}))
+    }else if(direction === "right"){
+        head = {x:snake[0].x,y:snake[0].y+1}
+        // snake = snake.map((elem)=>({x:elem.x,y:elem.y+1}))
+    }else if(direction === "down"){
+        head = {x:snake[0].x+1,y:snake[0].y}
+    //    snake = snake.map((elem)=>({x:elem.x+1,y:elem.y}))
+    }else if(direction === "up"){
+        head = {x:snake[0].x-1,y:snake[0].y}
+    //    snake = snake.map((elem)=>({x:elem.x-1,y:elem.y}))
+    }
+
+    if(head.x < 0 || head.x >= rows || head.y >=cols || head.y < 0){
+        console.log(head)
+        alert("game over")
+        clearInterval(intervalId)
+        return
+    }
+    // render food in board
+    boxes[`${food.x}-${food.y}`].classList.add("food") 
+
+    if(head.x === food.x && head.y === food.y){ // that meanse food is consumed
+        boxes[`${food.x}-${food.y}`].classList.remove("food")
+        snake.unshift(food) // snake ke ander food ko jod do i.e snake length increases
+        food = {x:Math.floor(Math.random() * rows),y:Math.floor(Math.random()*cols)} // recreate food in differnt place
+    }
+    snake.forEach((elem)=>boxes[`${elem.x}-${elem.y}`].classList.remove("fill")) // initially remove all fills
+    snake.unshift(head) // head ko front side place kiya
+    snake.pop()
+
     snake.forEach((elem)=>boxes[`${elem.x}-${elem.y}`].classList.add("fill"))  // here we render the snake
 }
 
@@ -70,29 +107,8 @@ addEventListener("keydown",(e)=>{
 //     render()
 // },300)
 
-setInterval(()=>{
+intervalId = setInterval(()=>{
     // 3fps(we execute render function 3 times per second) hum yaha pe sirf execute fast kar rahe hai esiliye hum box move hote dikh rahe hai lekin real me wo move nahi ho rahe hai hum frequenly diffietn img dikha rahe hai isiliy wo move hoti dikh rahi hai
-    
-    let head = null
-  
-    if(direction === "left"){
-        head = {x:snake[0].x,y:snake[0].y-1}
-    //    snake = snake.map((elem)=>({x:elem.x,y:elem.y-1}))
-    }else if(direction === "right"){
-        head = {x:snake[0].x,y:snake[0].y+1}
-        // snake = snake.map((elem)=>({x:elem.x,y:elem.y+1}))
-    }else if(direction === "down"){
-        head = {x:snake[0].x+1,y:snake[0].y}
-    //    snake = snake.map((elem)=>({x:elem.x+1,y:elem.y}))
-    }else if(direction === "up"){
-        head = {x:snake[0].x-1,y:snake[0].y}
-    //    snake = snake.map((elem)=>({x:elem.x-1,y:elem.y}))
-    }
-
-    snake.forEach((elem)=>boxes[`${elem.x}-${elem.y}`].classList.remove("fill")) // initially remove all fills
-    snake.unshift(head) // head ko front side place kiya
-    snake.pop()
-   
     render()
 },300)
 
