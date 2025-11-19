@@ -8,7 +8,7 @@
 html,body{
     height: 100%;
     width: 100%;
-    border: 2px solid red;
+    /* border: 2px solid red; */
 }
 
 :root{
@@ -103,3 +103,42 @@ section .infos{
     background-color: var(--bg-food-color);
 }
 
+.modal{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    backdrop-filter: blur(5px);
+}
+
+.gameStartModal{
+    border: 2px solid var(--border-primary-color);
+    border-radius: var(--border-radius-md);
+    display: inline-block;
+    padding: var(--space-sm) var(--space-md);
+    
+}
+
+.btn{
+    padding: var(--space-sm) var(--space-lg);
+    border-radius: var(--border-radius-sm);
+    /* outline: none; */
+    /* font-size: var(--text-primary-color); */
+    transition: all 0.2s ease-in-out;
+}
+
+.btn:hover{
+    transform: scale(1.05);
+}
+
+.gameRestartModal{
+     border: 2px solid var(--border-primary-color);
+    border-radius: var(--border-radius-md);
+    display: inline-block;
+    padding: var(--space-sm) var(--space-md);
+    display: none;
+}

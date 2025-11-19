@@ -1,5 +1,11 @@
 
 const board = document.querySelector(".board")
+const startButton = document.querySelector("#startButton")
+const reStartButton = document.querySelector("#restartButton")
+const modal = document.querySelector(".modal")
+const gameRestartModal = document.querySelector(".gameRestartModal")
+const gameStartModal = document.querySelector(".gameStartModal")
+
 const boxHeight = 50
 const boxWidth = 50
 const boardHeight = board.clientHeight // here we get board height and width
@@ -56,8 +62,12 @@ function render(){
 
     if(head.x < 0 || head.x >= rows || head.y >=cols || head.y < 0){
         console.log(head)
-        alert("game over")
+        // alert("game over")
+        modal.style.display = "flex"
+        gameStartModal.style.display = "none"
+        gameRestartModal.style.display = "inline-block"
         clearInterval(intervalId)
+        // gameStartModal.style.display = "none"
         return
     }
     // render food in board
@@ -88,6 +98,29 @@ addEventListener("keydown",(e)=>{
     }
 })
 
+startButton.addEventListener("click",()=>{
+    modal.style.display = "none"
+     intervalId = setInterval(()=>{
+    // 3fps(we execute render function 3 times per second) hum yaha pe sirf execute fast kar rahe hai esiliye hum box move hote dikh rahe hai lekin real me wo move nahi ho rahe hai hum frequenly diffietn img dikha rahe hai isiliy wo move hoti dikh rahi hai
+    render()
+},300)
+})
+
+reStartButton.addEventListener("click",reStartGame)
+
+function reStartGame(){
+
+    modal.style.display = "none"
+    boxes[`${food.x}-${food.y}`].classList.remove("food") 
+    snake.forEach((elem)=>boxes[`${elem.x}-${elem.y}`].classList.remove("fill")) // initially remove all fills
+    food = {x:Math.floor(Math.random() * rows),y:Math.floor(Math.random()*cols)} // recalculate food
+    snake = [{x:2,y:13}]  // recalculate snake
+    intervalId = setInterval(()=>{
+    // 3fps(we execute render function 3 times per second) hum yaha pe sirf execute fast kar rahe hai esiliye hum box move hote dikh rahe hai lekin real me wo move nahi ho rahe hai hum frequenly diffietn img dikha rahe hai isiliy wo move hoti dikh rahi hai
+    render()
+},300)
+}
+
 // core logic
 // setInterval(()=>{
 //     // 3fps(we execute render function 3 times per second) hum yaha pe sirf execute fast kar rahe hai esiliye hum box move hote dikh rahe hai lekin real me wo move nahi ho rahe hai hum frequenly diffietn img dikha rahe hai isiliy wo move hoti dikh rahi hai
@@ -107,9 +140,9 @@ addEventListener("keydown",(e)=>{
 //     render()
 // },300)
 
-intervalId = setInterval(()=>{
-    // 3fps(we execute render function 3 times per second) hum yaha pe sirf execute fast kar rahe hai esiliye hum box move hote dikh rahe hai lekin real me wo move nahi ho rahe hai hum frequenly diffietn img dikha rahe hai isiliy wo move hoti dikh rahi hai
-    render()
-},300)
+// intervalId = setInterval(()=>{
+//     // 3fps(we execute render function 3 times per second) hum yaha pe sirf execute fast kar rahe hai esiliye hum box move hote dikh rahe hai lekin real me wo move nahi ho rahe hai hum frequenly diffietn img dikha rahe hai isiliy wo move hoti dikh rahi hai
+//     render()
+// },300)
 
 
