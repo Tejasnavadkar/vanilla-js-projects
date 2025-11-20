@@ -5,6 +5,9 @@ const reStartButton = document.querySelector("#restartButton")
 const modal = document.querySelector(".modal")
 const gameRestartModal = document.querySelector(".gameRestartModal")
 const gameStartModal = document.querySelector(".gameStartModal")
+const highScoreElement = document.querySelector("#high-score")
+const scoreElement = document.querySelector("#score")
+const timerElement = document.querySelector("#time")
 
 const boxHeight = 50
 const boxWidth = 50
@@ -21,6 +24,10 @@ let snake = [{x:2,y:13}]   // ,{x:1,y:14},{x:1,y:15} snake coordinates
 let direction = "right"
 let intervalId = null
 let food = {x:Math.floor(Math.random() * rows),y:Math.floor(Math.random()*cols)} // create food box randomlly in board
+
+let score = 0;
+let highScore = JSON.parse(localStorage.getItem("highScore")) || 0;
+let timer = `00-00`
 
 //here we add boxes inside board accoording to the board height and width
 // for(let i = 0 ; i < cols*rows ; i++){
@@ -43,8 +50,9 @@ console.log("boxes-",boxes)
 
 // render()
 function render(){
-
-    let head = null
+ 
+    highScoreElement.innerText = highScore
+    let head = null;
   
     if(direction === "left"){
         head = {x:snake[0].x,y:snake[0].y-1}
@@ -73,10 +81,19 @@ function render(){
     // render food in board
     boxes[`${food.x}-${food.y}`].classList.add("food") 
 
+    //food consume logic
     if(head.x === food.x && head.y === food.y){ // that meanse food is consumed
         boxes[`${food.x}-${food.y}`].classList.remove("food")
         snake.unshift(food) // snake ke ander food ko jod do i.e snake length increases
         food = {x:Math.floor(Math.random() * rows),y:Math.floor(Math.random()*cols)} // recreate food in differnt place
+        
+        // increase score
+        score += 10
+        scoreElement.innerText = score
+        if(score > highScore){ // if score is greater than highscore then update the highscore with score
+            console.log({score,highScore})
+            localStorage.setItem("highScore",score)
+        }
     }
     snake.forEach((elem)=>boxes[`${elem.x}-${elem.y}`].classList.remove("fill")) // initially remove all fills
     snake.unshift(head) // head ko front side place kiya
@@ -110,6 +127,12 @@ reStartButton.addEventListener("click",reStartGame)
 
 function reStartGame(){
 
+    score = 0
+    timer = `00-00`
+    scoreElement.innerText = score
+    timerElement.innerText = timer
+    highScore = JSON.parse(localStorage.getItem("highScore")) || 0;
+    highScoreElement.innerText = highScore
     modal.style.display = "none"
     boxes[`${food.x}-${food.y}`].classList.remove("food") 
     snake.forEach((elem)=>boxes[`${elem.x}-${elem.y}`].classList.remove("fill")) // initially remove all fills
