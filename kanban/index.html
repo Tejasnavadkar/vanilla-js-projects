@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanban</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <main>
+         <!-- navbar -->
+          <nav class="nav-bar">
+            <div class="left">
+                KANBAN
+            </div>
+            <div class="right">
+                <button>Add task</button>
+            </div>
+          </nav>
+
+         <!-- board -->
+         <section class="board">
+             <div id="todo-container" class="list">
+                <div class="heading">
+                    <span>To Do</span>
+                    <span id="todo-count">count</span>
+                </div>
+                <div id="todo-list" class="tasks">
+                    <div class="task-item" >
+                        <div class="task-title">Task-1</div>
+                        <div class="task-description" >Description for task-1</div>
+                        <div class="Delete-button">
+                            <button class="task-delete-button" >Delete</button>
+                        </div>
+                    </div>
+                </div>
+             </div>
+
+             <div id="inProgress-container" class="list">
+                <div class="heading">
+                    <span>In Progress</span>
+                    <span id="inProgress-count">count</span>
+                </div>
+                <div id="inProgress-list" class="tasks">
+                    
+                </div>
+             </div>
+
+             <div id="done-container" class="list">
+                <div class="heading">
+                    <span>Done</span>
+                    <span id="done-count">count</span>
+                </div>
+                <div id="done-list" class="tasks">
+                    
+                </div>
+             </div>
+         </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
