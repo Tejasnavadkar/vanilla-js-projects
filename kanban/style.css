@@ -119,6 +119,7 @@ nav button{
     flex-direction: column;
     border-radius: var(--border-radius-md);
     transition: all 0.7s cubic-bezier(0.19,1,0.22,1);
+    width: 500px;
 }
 
 /* hover on list */
@@ -137,6 +138,9 @@ nav button{
     padding: var(--padding-m);
     /* border: 1px solid yellow; */
     flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
     
 }
 
@@ -171,4 +175,67 @@ section .list .tasks .task-item .task-title{
 .Delete-button{
     align-self: self-end;
 }
+
+.task-form{
+    border: 1px solid white;
+    border-radius: var(--border-radius-md);
+     padding: var(--padding-l) var(--padding-m);
+     height: 300px;
+    width: 300px;
+     /* padding: ; */
+     display: flex;
+     flex-direction: column;
+   justify-content: center;
+   gap:30px;
+
+}
+
+.modal{
+    height: 100vh;
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    right: 0%;
+    /* backdrop-filter: blur(5px); */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+
+.active-Modal{
+    display: flex;
+}
+
+.conatiner{
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+input{
+    padding: var(--padding-m) var(--padding-l);
+    border-radius: var(--border-radius-xs);
+    border: none;
+    outline: none;
+}
+
+.create-button{
+    width: 100%;
+    padding: var(--padding-m) var(--padding-s);
+    background-color: rgb(50, 216, 50);
+    border: none;
+    outline: none;
+    border-radius: var(--border-radius-sm); 
+}
+
+.bg{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.596);
+    z-index: -1;
+    backdrop-filter: blur(5px);
+}
+
 

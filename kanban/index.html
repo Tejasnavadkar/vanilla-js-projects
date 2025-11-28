@@ -15,7 +15,7 @@
                 KANBAN
             </div>
             <div class="right">
-                <button>Add task</button>
+                <button id="add-task-toggle">Add task</button>
             </div>
           </nav>
 
@@ -58,6 +58,24 @@
              </div>
          </section>
     </main>
+
+    <!-- create task modal -->
+    <div class="modal">
+        <div class="bg"></div>
+        <div class="task-form">
+            <div class="title-container conatiner">
+                <span>Title</span>
+                <input id="title" type="text">
+            </div>
+            <div class="description-container conatiner">
+                <span>Description</span>
+                <textarea name="" id="description"></textarea>
+            </div>
+            <div >
+               <button class="create-button" >Create Task</button>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>

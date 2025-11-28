@@ -13,6 +13,16 @@ const todoCount = document.querySelector("#todo-count")
 const inProgressCount = document.querySelector("#inProgress-count")
 const doneCount = document.querySelector("#done-count")
 
+// modal related selectors
+const addTaskToggleButton = document.querySelector("#add-task-toggle")
+const createTaskModal = document.querySelector(".modal")
+const modalBg = document.querySelector(".bg")
+const createTaskButton = document.querySelector(".create-button")
+
+// form inputs selector
+const titleInput = document.querySelector("#title")
+const descriptionInput = document.querySelector("#description")
+
 // current drag element drag event se set hoga
 let draggedItem = null
 
@@ -97,6 +107,80 @@ function addEvents(listElement){
         updateTaskCounts()
     })
 }
+
+// function to create taskItem 
+function createTaskItem(title,description){
+
+       // Create main task-item div
+const taskItem = document.createElement("div");
+taskItem.className = "task-item";
+
+// Create task-title div
+const taskTitle = document.createElement("div");
+taskTitle.className = "task-title";
+taskTitle.textContent = title;
+
+// Create task-description div
+const taskDescription = document.createElement("div");
+taskDescription.className = "task-description";
+taskDescription.textContent = description;
+
+// Create Delete-button wrapper div
+const deleteBtnWrapper = document.createElement("div");
+deleteBtnWrapper.className = "Delete-button";
+
+// Create delete button
+const deleteButton = document.createElement("button");
+deleteButton.className = "task-delete-button";
+deleteButton.textContent = "Delete";
+
+// Append delete button inside wrapper
+deleteBtnWrapper.appendChild(deleteButton);
+
+// Append all children to task-item
+taskItem.appendChild(taskTitle);
+taskItem.appendChild(taskDescription);
+taskItem.appendChild(deleteBtnWrapper);
+
+return taskItem
+}
+
+//event listeners
+addTaskToggleButton.addEventListener("click",()=>{
+   createTaskModal.classList.toggle("active-Modal")
+})
+
+// on bg click modal get close
+modalBg.addEventListener("click",()=>{
+    createTaskModal.classList.toggle("active-Modal")
+})
+
+// form handler
+createTaskButton.addEventListener("click",()=>{
+    // console.log({titleInput:titleInput.value,descriptionInput:descriptionInput.value})
+    let title = titleInput.value
+    let description = descriptionInput.value
+
+    const taskItem = createTaskItem(title,description)
+
+    todoList.appendChild(taskItem)
+
+// here we set draggable attribute and drag event to new task
+taskItem.setAttribute("draggable",true)
+taskItem.addEventListener("drag",(e)=>{
+        console.log("dragged-item:",e.target)
+        draggedItem = e.target
+    })
+
+ //close the modal
+ createTaskModal.classList.toggle("active-Modal")
+
+ titleInput.value = ""
+ descriptionInput.value = ""
+
+})
+
+
 
 
 addEvents(todoList)
