@@ -23,6 +23,8 @@ const createTaskButton = document.querySelector(".create-button")
 const titleInput = document.querySelector("#title")
 const descriptionInput = document.querySelector("#description")
 
+
+
 // current drag element drag event se set hoga
 let draggedItem = null
 
@@ -38,12 +40,77 @@ let draggedItem = null
 // task selector
 const allTaskItems = document.querySelectorAll(".task-item")
 
+const lists = [todoList,inProgressList,doneList]
+
+let data = {}
+
+// if data present in localStorage then render that data in screen
+if(localStorage.getItem("data")){
+
+      const localData = JSON.parse(localStorage.getItem("data"))
+    // obj pe loop lagaya
+    for(let key in localData){
+        // console.log("key-data",localData[key])
+        // each list array pe loop lagaya
+        localData[key].forEach((task)=>{
+            //create task div
+          const item = createTaskItem(task.title,task.description)
+          const list = document.querySelector(`#${key}`)
+          // here we set draggable attribute and drag event to new task
+          item.setAttribute("draggable",true)
+          item.addEventListener("drag",(e)=>{
+        // console.log("dragged-item:",e.target)
+        draggedItem = e.target
+    })
+        // add event listner to delete button
+        let taskDeleteButton =  item.querySelector(".task-delete-button")
+        addDeleteEvent(taskDeleteButton)
+          list.appendChild(item)
+        })
+    }
+}
+
+
+function addDeleteEvent(buttonItem){
+
+    buttonItem?.addEventListener("click",(e)=>{
+    let button = e.target
+    const task = button.closest(".task-item")
+    let taskTitle = task.querySelector(".task-title").innerText
+    let taskDescription = task.querySelector(".task-description").innerText
+    let taskItem = {
+        title:taskTitle,
+        description:taskDescription
+    }
+
+   // get data and delete item
+   let data = JSON.parse(localStorage.getItem("data"))
+
+//    console.log("data=",data)
+
+    for(let key in data){
+       data[key] = data[key].filter((item)=>item.title !== taskItem.title && item.description !== taskItem.description)
+    }
+
+    localStorage.setItem("data",JSON.stringify(data))
+    task.remove() // remove task from dom
+    updateTaskCounts()
+   
+
+})
+}
+
+//task-delete button
+let taskDeleteButton = document.querySelector(".task-delete-button")
+
+console.log(taskDeleteButton)
+
 
 // here we set draggable attribute and drag listener to every task item
 allTaskItems.forEach((item)=>{
     item.setAttribute("draggable",true)
     item.addEventListener("drag",(e)=>{
-        console.log("dragged-item:",e.target)
+        // console.log("dragged-item:",e.target)
         draggedItem = e.target
     })
 })
@@ -93,10 +160,10 @@ function addEvents(listElement){
        listElement.addEventListener("drop", (e) => {
         let destination = e.target
         e.preventDefault()
-        console.log({
-            draggedItem,
-            destination
-        })
+        // console.log({
+        //     draggedItem,
+        //     destination
+        // })
           
         // destination list me drop kar diya 
         destination.append(draggedItem)
@@ -105,7 +172,24 @@ function addEvents(listElement){
         const container = destination.closest('.list') 
         container.classList.remove("list-Hover")
         updateTaskCounts()
+
+         //storing data in localstorage
+         setLocalStorage()
+
+   
     })
+}
+
+// storing data in localStorage
+function setLocalStorage(){
+     lists.forEach((list)=>{
+      // console.log("list--",list)
+      const taskItems = list.querySelectorAll(".task-item")
+      // console.log({taskItems}) 
+      data[list.id] = Array.from(taskItems)?.map((item)=>({title:item.children[0]?.innerText,description:item.children[1]?.innerText}))
+   })
+//    console.log(data)
+   localStorage.setItem("data",JSON.stringify(data))
 }
 
 // function to create taskItem 
@@ -160,15 +244,20 @@ createTaskButton.addEventListener("click",()=>{
     // console.log({titleInput:titleInput.value,descriptionInput:descriptionInput.value})
     let title = titleInput.value
     let description = descriptionInput.value
+    
 
     const taskItem = createTaskItem(title,description)
 
+      // add event listner to each delete button
+    let taskDeleteButton =  taskItem.querySelector(".task-delete-button")
+    addDeleteEvent(taskDeleteButton)
+
     todoList.appendChild(taskItem)
 
-// here we set draggable attribute and drag event to new task
-taskItem.setAttribute("draggable",true)
-taskItem.addEventListener("drag",(e)=>{
-        console.log("dragged-item:",e.target)
+    // here we set draggable attribute and drag event to new task
+    taskItem.setAttribute("draggable",true)
+    taskItem.addEventListener("drag",(e)=>{
+        // console.log("dragged-item:",e.target)
         draggedItem = e.target
     })
 
@@ -177,8 +266,39 @@ taskItem.addEventListener("drag",(e)=>{
 
  titleInput.value = ""
  descriptionInput.value = ""
+ updateTaskCounts()
+
+ //storing data in localstorage
+  setLocalStorage()
+
 
 })
+
+// task delete button 
+// taskDeleteButton?.addEventListener("click",(e)=>{
+//     let button = e.target
+//     const task = button.closest(".task-item")
+//     let taskTitle = task.querySelector(".task-title").innerText
+//     let taskDescription = task.querySelector(".task-description").innerText
+//     let taskItem = {
+//         title:taskTitle,
+//         description:taskDescription
+//     }
+
+//    // get data and delete item
+//    let data = JSON.parse(localStorage.getItem("data"))
+
+// //    console.log("data=",data)
+
+//     for(let key in data){
+//        data[key] = data[key].filter((item)=>item.title !== taskItem.title && item.description !== taskItem.description)
+//     }
+
+//     console.log("new data-",data)
+
+
+
+// })
 
 
 
